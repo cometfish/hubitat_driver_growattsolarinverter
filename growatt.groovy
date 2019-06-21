@@ -1,26 +1,26 @@
 metadata {
-    definition(name: "Growatt Solar Inverter", namespace: "community", author: "cometfish") {
+    definition(name: "Growatt Solar Inverter", namespace: "community", author: "cometfish", importUrl: "https://raw.githubusercontent.com/cometfish/hubitat_driver_growattsolarinverter/master/growatt.groovy") {
         capability "PowerMeter"
         capability "EnergyMeter"
         capability "Polling"
         capability "TemperatureMeasurement"
-		
-		attribute "power", "number"
+
+        attribute "power", "number"
         attribute "energy", "number"
         attribute "energy_total", "number"
         attribute "hours_total", "number"
         attribute "temperature", "number"
-		attribute "input_power", "number"
-		attribute "output_power", "number"
+        attribute "input_power", "number"
+        attribute "output_power", "number"
         attribute "input_voltage", "number"
-		attribute "input_voltage2", "number"
+        attribute "input_voltage2", "number"
         attribute "grid_voltage", "number"
         attribute "current", "number"
         attribute "frequency", "number"
         attribute "status", "text"
         attribute "lastupdate", "date"
-        
-		command "poll"
+
+        command "poll"
     }
 }
 
