@@ -19,6 +19,8 @@ metadata {
         attribute "frequency", "number"
         attribute "status", "text"
         attribute "lastupdate", "date"
+        
+        attribute "tile", "text"
 
         command "poll"
     }
@@ -45,6 +47,9 @@ def updated() {
 }
 
 def poll() {
+
+
+ 
     if (logEnable) log.debug settings.scriptURL
 
     httpGet(["uri":settings.scriptURL]) { resp ->
@@ -69,9 +74,23 @@ def poll() {
                 sendEvent(name: "current", value: resp.data.current, unit: "A", isStateChange: true)
                 sendEvent(name: "frequency", value: resp.data.frequency, unit: "Hz", isStateChange: true)
                 sendEvent(name: "status", value: resp.data.status_desc, unit: "", isStateChange: true)
+                
+                def colour = "#f00"
+                if (resp.data.output_power>=100)
+                   colour = "#0f0" 
+                else if (resp.data.output_power>=50)
+                    colour = "#0ff"
+                def tilehtml = "<br><span style='font-size:30px;color:" +colour+"'>" +resp.data.output_power+"W</span><br><span style='font-size:12px;color:#aaa'>Total:" +resp.data.energy_today+"kWh</span>"
+
+                sendEvent(name: "tile", value: tilehtml, isStateChange: true)
+
+  
            }
         } else {
             log.error "Error: ${resp}"
         }
     }			
-} 
+}
+
+
+     
