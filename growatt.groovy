@@ -4,6 +4,7 @@ metadata {
         capability "EnergyMeter"
         capability "Polling"
         capability "TemperatureMeasurement"
+        capability "VoltageMeasurement"
 
         attribute "power", "number"
         attribute "energy", "number"
